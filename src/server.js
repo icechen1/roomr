@@ -29,6 +29,8 @@ import routes from './routes';
 import assets from './assets'; // eslint-disable-line import/no-unresolved
 import { port, auth } from './config';
 
+import { API_KEY } from './secrets';
+
 const app = express();
 
 //
