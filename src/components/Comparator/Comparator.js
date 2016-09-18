@@ -76,7 +76,7 @@ class Comparator extends Component {
     return {__html: ''};
   }
 
-  parseReviews(reviews) {
+  parseReviews(reviews, good) {
     let out = {};
     
     for(let review of reviews) {
@@ -100,7 +100,9 @@ class Comparator extends Component {
     }
     let out2 = [];
     for(let word in out) {
-      out2.push({word: word, count: out[word]});
+      if(REVIEW_WORDS[word] == good){
+        out2.push({word: word, count: out[word]});
+      }
     }
     return out2;
   }
@@ -156,14 +158,19 @@ class Comparator extends Component {
                       </div>
                       <div dangerouslySetInnerHTML={ this.parseFeatures(item.features) }></div>
                       <h4> Review Analysis </h4>
-                      { item.reviews ? this.parseReviews(item.reviews).map((item, index) => (
-                        <div key={item.word} className={s.tag}><b>{item.word}</b> {item.count}</div>
-                      )) : <p> No reviews :( </p> }
+                      { this.parseReviews(item.reviews, true).map((item, index) => (
+                        <div key={item.word} className={s.tagGood}><b>{item.word}</b> {item.count}</div>
+                      )) }
+                      { this.parseReviews(item.reviews, false).map((item, index) => (
+                        <div key={item.word} className={s.tagBad}><b>{item.word}</b> {item.count}</div>
+                      )) }
                     </div>
                   </div>
-                  <div className={s.buyBtn}>
-                    <a href={item.productUrl}>Buy</a>
-                  </div>
+                  <a href={item.productUrl} className={s.buyBtnLink}>
+                    <div className={s.buyBtn}>
+                      Buy
+                    </div>
+                  </a>
                 </div>
               )) }
               </div>
