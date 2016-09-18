@@ -17,13 +17,13 @@ import 'whatwg-fetch';
 
 const mock = [
   {
-    productId: 0,
-    productItemName: 'Cool ass TV',
+    skuNumber: 0,
+    title: 'Cool ass TV',
     description: 'This TV is petty damn dope.'
   },
   {
-    productId: 1,
-    productItemName: 'Lame ass TV',
+    skuNumber: 1,
+    title: 'Lame ass TV',
     description: 'This TV is petty damn dope.'
   }
 ];
@@ -64,14 +64,25 @@ class Comparator extends Component {
               <div className={s.products_columns}>
               { this.state.items.map((item, index) => (
                 <div key={item.skuNumber} className={s.product}>
-                  <div className={s.topInfo}>
-                    <h3>{item.productItemName}</h3>
+                  <div className={s.innerProduct}> 
+                    <div className={s.topInfo}>
+                      <h3>{item.title}</h3>
+                    </div>
+                    <div className={s.center}>
+                      <img src={item.image} alt="Product Image" />
+                    </div>
+                    <div className={s.featureslist}>
+                      <div className={s.tag}>${item.price}</div>
+                      { (item.overallRating > 0) ?
+                          <div className={s.rate}><span>{item.overallRating}/5</span></div>
+                        :
+                          <div className={s.rate}><span>Unrated</span></div>
+                      }
+                      <div>{item.description}</div>
+                    </div>
                   </div>
-                  <img src={item.image} alt="Product Image" />
-                  <div className={s.featureslist}>
-                    <div className={s.tag}>${item.price}</div>
-                    <div className={s.rate}><span>5/5</span></div>
-                    <div>{item.description}</div>
+                  <div className={s.buyBtn}>
+                    <a href={item.url}>Buy</a>
                   </div>
                 </div>
               )) }
