@@ -31,7 +31,7 @@ class SearchBar extends Component {
 
 }
 SearchBar.propTypes = {
-  showTitle: PropTypes.string,
+  callback: PropTypes.function,
 };
 
 export default withStyles(s)(SearchBar);
