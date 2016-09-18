@@ -43,6 +43,11 @@
   text-align: center;
 }
 
+@keyframes wiggle {
+  0% { transform: rotate(-2deg); }
+  100% { transform: rotate(2deg); }
+}
+
 .bannerTitle {
   margin: 0;
   padding: 10px;
@@ -56,4 +61,6 @@
   color: rgba(255, 255, 255, 0.5);
   font-size: 1.25em;
   margin: 0;
+  animation: wiggle .1s infinite alternate;
+  transform-origin: center 60%;
 }
