@@ -10,6 +10,7 @@
 import cx from 'classnames';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import React, { Component, PropTypes } from 'react';
+import SearchBar from '../../components/SearchBar';
 import s from './Comparator.css';
 import Link from '../Link';
 
@@ -31,6 +32,7 @@ class Comparator extends Component {
     return (
       <div>
         <h1 className={s.title}>Comparing {mock.length} Products</h1>
+        <SearchBar />
         <div className={s.products_table}>            
             <div className={s.products_wrapper}>
               <div className={s.products_columns}>
