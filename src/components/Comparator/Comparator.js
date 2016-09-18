@@ -140,7 +140,7 @@ class Comparator extends Component {
                         }
                       </div>
                       <div dangerouslySetInnerHTML={ this.parseFeatures(item.features) }></div>
-                      <h2> Review Analysis </h2>
+                      <h4> Review Analysis </h4>
                       { item.reviews ? this.parseReviews(item.reviews).map((item, index) => (
                         <div className={s.tag}><b>{item.word}</b> {item.count}</div>
                       )) : <p> No reviews :( </p> }
