@@ -53,6 +53,17 @@
   display: inline-block
 }
 
+.rate {
+  font-size: 1.2em;
+  color: darkorange;
+}
+
+.rateNum {
+  color: orangered;
+  font-size: 2em;
+}
+
+
 .innerProduct {
   padding: 15px 15px 55px 15px;
 }

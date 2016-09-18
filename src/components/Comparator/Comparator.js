@@ -73,7 +73,7 @@ class Comparator extends Component {
     console.log(sentencesTags)
     ;
     //return {__html: stripped};
-    // return "";
+    return {__html: ''};
   }
 
   parseReviews(reviews) {
@@ -105,6 +105,17 @@ class Comparator extends Component {
     return out2;
   }
 
+  renderSpecs(specs) {
+    let out = [];
+    specs.map((el, index) => {
+      if(el.value.length > 0) {
+        let obj = { name: el.name, value: el.value[0] };
+        out.push(obj);
+      }
+    });
+    return out;
+  }
+
   componentWillUnmount() {
   }
 
@@ -133,8 +144,12 @@ class Comparator extends Component {
                             null
                         }
                         
+                        { this.renderSpecs(item.specifications).map((el, index) => 
+                          <div key={el.name}> <b>{ el.name }</b> : { el.value } </div>
+                        )}
+                        
                         { (item.overallRating > 0) ?
-                            <div className={s.rate}><span>{item.overallRating}/5</span></div>
+                            <div className={s.rate}><span className={s.rateNum}>⭐ {item.overallRating.toFixed(1)}</span>/5</div>
                           :
                             <div className={s.rate}><span>Unrated</span></div>
                         }
@@ -142,7 +157,7 @@ class Comparator extends Component {
                       <div dangerouslySetInnerHTML={ this.parseFeatures(item.features) }></div>
                       <h4> Review Analysis </h4>
                       { item.reviews ? this.parseReviews(item.reviews).map((item, index) => (
-                        <div className={s.tag}><b>{item.word}</b> {item.count}</div>
+                        <div key={item.word} className={s.tag}><b>{item.word}</b> {item.count}</div>
                       )) : <p> No reviews :( </p> }
                     </div>
                   </div>
