@@ -30,17 +30,42 @@ class Comparator extends Component {
 
   onSearchSubmit(res) {
     console.log('fetching at /bd/v0/products/' + res);
-    fetch('/bd/v0/products/' + res)
-      .then(function(response) {
-        return response.json()
-      }).then((json) => {
-        console.log(json);
-        console.log(this.state.items);
-        this.state.items.push(json);
+
+    let overview = {};
+    let details = {};
+    let reviews = {};
+
+    fetch('/bd/v0/productSearch/' + res)
+      .then((response) => {
+        return response.json();
+      }).then((overviewJson) => {
+        overview = overviewJson;
+        return fetch('/bd/v0/products/' + res)
+      }).then((response) => {
+        return response.json();
+      }).then((detailsJson) => {
+        details = detailsJson;
+        return fetch('/bd/v0/productReviews/' + res)
+      }).then((response) => {
+        return response.json();
+      }).then((reviews) => {
+        //union of 3 jsons
+        console.log(overview);
+        console.log(details);
+        console.log(reviews);
+
+        details.overallRating = overview[0].overallRating;
+        details.reviews = reviews;
+
+        this.state.items.push(details);
         this.setState({items: this.state.items});
+        console.log(this.state.items);
       }).catch(function(ex) {
         console.error('parsing failed', ex)
       });
+
+
+
   }
 
   componentWillUnmount() {
