@@ -1,5 +1,5 @@
 .products_wrapper {
-  overflow-x: auto;
+  overflow-x: auto !important;
   /* this fixes the buggy scrolling on webkit browsers - mobile devices only - when overflow property is applied */
   -webkit-overflow-scrolling: touch;
 }
@@ -66,9 +66,11 @@
   box-shadow: 0 8px 16px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
-.tag {
+.priceTag {
     border-radius: 8px;
-    background: indianred;
+    color: indianred;
     padding: 10px;
     display: inline-block;
+    font-size: 26pt;
+    font-weight: bold;
 }
