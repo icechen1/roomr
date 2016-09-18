@@ -16,16 +16,7 @@ import Link from '../Link';
 import 'whatwg-fetch';
 
 const mock = [
-  {
-    skuNumber: 0,
-    title: 'Cool ass TV',
-    description: 'This TV is petty damn dope.'
-  },
-  {
-    skuNumber: 1,
-    title: 'Lame ass TV',
-    description: 'This TV is petty damn dope.'
-  }
+
 ];
 
 class Comparator extends Component {
@@ -44,6 +35,7 @@ class Comparator extends Component {
         return response.json()
       }).then((json) => {
         console.log(json);
+        console.log(this.state.items);
         this.state.items.push(json);
         this.setState({items: this.state.items});
       }).catch(function(ex) {
@@ -66,13 +58,19 @@ class Comparator extends Component {
                 <div key={item.skuNumber} className={s.product}>
                   <div className={s.innerProduct}> 
                     <div className={s.topInfo}>
-                      <h3>{item.title}</h3>
+                      <h3>{item.productName}</h3>
                     </div>
                     <div className={s.center}>
-                      <img src={item.image} alt="Product Image" />
+                    { item.mainImage ?
+                      <img src={item.mainImage.url} alt="Product Image" />
+                      : null }
                     </div>
                     <div className={s.featureslist}>
-                      <div className={s.tag}>${item.price}</div>
+                      { (item.pricingTiers) ?
+                          <div className={s.tag}><span>${item.pricingTiers[0].retailPrice}</span></div>
+                        :
+                          null
+                      }
                       { (item.overallRating > 0) ?
                           <div className={s.rate}><span>{item.overallRating}/5</span></div>
                         :
@@ -82,7 +80,7 @@ class Comparator extends Component {
                     </div>
                   </div>
                   <div className={s.buyBtn}>
-                    <a href={item.url}>Buy</a>
+                    <a href={item.productUrl}>Buy</a>
                   </div>
                 </div>
               )) }
