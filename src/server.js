@@ -36,18 +36,19 @@ var util = require('util');
 var https = require('https');
 var request = require('request');
 
-var options = 
-{
-  uri: 'https://api.builddirect.io/products',
-  headers: {
-      'Ocp-Apim-Subscription-Key': API_KEY
-  },
-  //path: "/products/?query=table",
-  method: 'GET'
-};
+var options = function() {
+  return {
+    uri: 'https://api.builddirect.io/products',
+    headers: {
+        'Ocp-Apim-Subscription-Key': API_KEY
+    },
+    //path: "/products/?query=table",
+    method: 'GET'
+  };
+}
 
 app.get('/bd/v0/productSearch/:queryStr', function (req, res) {
-  var payload = options;
+  var payload = options();
   function callback(error, response, body) {  
     if (!error && response.statusCode == 200) {
       res.send(JSON.parse(body));
@@ -62,22 +63,27 @@ app.get('/bd/v0/productSearch/:queryStr', function (req, res) {
 });
 
 app.get('/bd/v0/productReviews/:sku/:pgSize/:pgNum', function (req, res) {
-  var payload = options;
+  var payload = options();
   payload.uri += '/' + req.params.sku + '/reviews?pageSize=' + req.params.pgSize
                                       + '&pageNumber=' + req.params.pgNum
                                       + '&sortType=1';
+
   function callback(error, response, body) {
-    if (error) {
-      console.log(error);
-    }  
-    if (!error && response.statusCode == 200) {
-      res.send(JSON.parse(body));
-    }
-    else{
-      console.log(response.statusCode);
-      console.log(payload.uri);
-      console.log(response.request.body);
-    }
+      if (!error && response.statusCode == 200) {
+        var json = JSON.parse(body);
+        var comments = [];
+
+        //json.forEach(function (item) {
+        for(var elem of json.Data){
+          comments.push(elem.comment);
+        };
+        res.send(comments);
+      }
+      else{
+        console.log(response.statusCode);
+        console.log(payload.uri);
+        console.log(response.request.body);
+      }
   }
   request(payload, callback);
 });
