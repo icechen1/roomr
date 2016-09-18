@@ -62,11 +62,9 @@ app.get('/bd/v0/productSearch/:queryStr', function (req, res) {
   request(payload, callback);
 });
 
-app.get('/bd/v0/productReviews/:sku/:pgSize/:pgNum', function (req, res) {
+app.get('/bd/v0/productReviews/:sku', function (req, res) {
   var payload = options();
-  payload.uri += '/' + req.params.sku + '/reviews?pageSize=' + req.params.pgSize
-                                      + '&pageNumber=' + req.params.pgNum
-                                      + '&sortType=1';
+  payload.uri += '/' + req.params.sku + '/reviews?pageSize=1000&pageNumber=1&sortType=1';
 
   function callback(error, response, body) {
       if (!error && response.statusCode == 200) {
