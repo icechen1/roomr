@@ -145,16 +145,17 @@ class Comparator extends Component {
                           :
                             null
                         }
+
+                        { (item.overallRating > 0) ?
+                            <div className={s.rate}>⭐<span className={s.rateNum}>{item.overallRating.toFixed(1)}</span>/5</div>
+                          :
+                            <div className={s.rate}><span>Unrated</span></div>
+                        }
                         
                         { this.renderSpecs(item.specifications).map((el, index) => 
                           <div key={el.name}> <b>{ el.name }</b> : { el.value } </div>
                         )}
                         
-                        { (item.overallRating > 0) ?
-                            <div className={s.rate}><span className={s.rateNum}>⭐ {item.overallRating.toFixed(1)}</span>/5</div>
-                          :
-                            <div className={s.rate}><span>Unrated</span></div>
-                        }
                       </div>
                       <div dangerouslySetInnerHTML={ this.parseFeatures(item.features) }></div>
                       <h4> Review Analysis </h4>
