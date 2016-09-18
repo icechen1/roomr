@@ -129,6 +129,7 @@ class Comparator extends Component {
         <div className={s.products_table}>            
             <div className={s.products_wrapper}>
               <div className={s.products_columns}>
+              { this.state.items.length === 0 ? <h2> Nothing yet! Search on top. 😺 </h2>: null }
               { this.state.items.map((item, index) => (
                 <div key={item.skuNumber} className={s.product}>
                   <div className={s.innerProduct}> 
