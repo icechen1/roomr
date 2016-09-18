@@ -21,7 +21,7 @@ function Header() {
       <div className={s.container}>
         <Navigation className={s.nav} />
         <Link className={s.brand} to="/">
-          <img src={logoUrl} width="38" height="38" alt="React" />
+          <span width="38" height="38"> 🎅 </span>
           <span className={s.brandTxt}>bd2bd</span>
         </Link>
         <div className={s.banner}>

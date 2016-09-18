@@ -26,9 +26,29 @@ h4 {
     font-size: 2em;
 }
 
-.buyBtn {
+.removeBtn {
   position: absolute;
   bottom: 0;
+  width: 100%;
+  height: 50px;
+  background: orangered;
+  color: white;
+  text-align: center;
+}
+
+.removeBtnLink {
+    height: 50px;
+    width: 100%;
+    height: 100%;
+    line-height: 50px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.buyBtn {
+  position: absolute;
+  bottom: 50px;
   width: 100%;
   height: 50px;
   background: #373277;
@@ -89,7 +109,7 @@ h4 {
 
 
 .innerProduct {
-  padding: 15px 15px 55px 15px;
+  padding: 15px 15px 105px 15px;
 }
 
 .product:first-child{

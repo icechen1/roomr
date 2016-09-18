@@ -70,7 +70,6 @@ class Comparator extends Component {
   parseFeatures(html) {
     let stripped = html.replace(/<(?:.|\n)*?>/gm, '')
     let sentencesTags = nlp.text(stripped).tags();
-    console.log(sentencesTags)
     ;
     //return {__html: stripped};
     return {__html: ''};
@@ -116,6 +115,17 @@ class Comparator extends Component {
       }
     });
     return out;
+  }
+
+  removeItem(item) {
+    let key;
+    for(item of this.state.items) {
+      if(item.skuNumber === item.skuNumber) {
+        key = this.state.items.indexOf(item);
+      }
+    }
+    console.log(key);
+    this.setState({items: this.state.items.splice(key, 1)});
   }
 
   componentWillUnmount() {
@@ -173,6 +183,11 @@ class Comparator extends Component {
                   <a href={item.productUrl} className={s.buyBtnLink}>
                     <div className={s.buyBtn}>
                       Buy
+                    </div>
+                  </a>
+                  <a onClick={this.removeItem.bind(this, item)} className={s.removeBtnLink}>
+                    <div className={s.removeBtn}>
+                      Remove
                     </div>
                   </a>
                 </div>
