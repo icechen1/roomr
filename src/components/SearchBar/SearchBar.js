@@ -16,22 +16,24 @@ import Link from '../Link';
 class SearchBar extends Component {
   handleChange(event) {
     this.setState({search: event.target.value});
+    console.log(this.state);
+    this.props.callback(this.state.search);
   }
 
   render() {
     return (
       <div>
         <input
-        placeholder='Add new product to compare here...'
-        onChange={this.handleChange.bind(this)}
-        type="text"
+          placeholder='Add new product to compare here...'
+          onChange={this.handleChange.bind(this)}
+          type="text"
         />  
       </div>);
   }
 
 }
 SearchBar.propTypes = {
-  callback: PropTypes.function,
+  callback: PropTypes.func,
 };
 
 export default withStyles(s)(SearchBar);

@@ -13,6 +13,7 @@ import React, { Component, PropTypes } from 'react';
 import SearchBar from '../../components/SearchBar';
 import s from './Comparator.css';
 import Link from '../Link';
+import 'whatwg-fetch';
 
 const mock = [
   {
@@ -28,11 +29,32 @@ const mock = [
 ];
 
 class Comparator extends Component {
+
+  getInitialState() {
+   return {items: []}
+  }
+
+  onSearchSubmit(res) {
+    console.log('fetching at /bd/v0/productSearch/' + res);
+    fetch('/bd/v0/productSearch/' + res)
+      .then(function(response) {
+        return response.json()
+      }).then(function(json) {
+        console.log('parsed json', json)
+      }).catch(function(ex) {
+        console.log('parsing failed', ex)
+      });
+  }
+
+  componentWillUnmount() {
+    this.serverRequest.abort();
+  }
+
   render() {
     return (
       <div>
         <h1 className={s.title}>Comparing {mock.length} Products</h1>
-        <SearchBar />
+        <SearchBar callback={this.onSearchSubmit} />
         <div className={s.products_table}>            
             <div className={s.products_wrapper}>
               <div className={s.products_columns}>
