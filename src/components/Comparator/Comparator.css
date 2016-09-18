@@ -43,6 +43,16 @@
   position: relative; 
 }
 
+.tag {
+  border-radius: 20px;
+  background-color: green;
+  font-size: 0.8em;
+  padding: 7px;
+  margin: 4px;
+  color: white;
+  display: inline-block
+}
+
 .innerProduct {
   padding: 15px 15px 55px 15px;
 }
