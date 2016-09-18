@@ -16,7 +16,6 @@ function Home({ news }) {
   return (
     <div className={s.root}>
       <div className={s.container}>
-        <h1 className={s.title}>Compare BuildDirect Products</h1>
         <Comparator />
       </div>
     </div>

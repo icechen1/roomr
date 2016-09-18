@@ -28,22 +28,26 @@ const mock = [
 
 class Comparator extends Component {
   render() {
-    return (<div className={s.products_table}>            
-          <div className={s.products_wrapper}>
-            <div className={s.products_columns}>
-            { mock.map((item, index) => (
-              <div className={s.product}>
-                <div className={s.topInfo}>
-                  <h3>{item.name}</h3>
+    return (
+      <div>
+        <h1 className={s.title}>Comparing {mock.length} Products</h1>
+        <div className={s.products_table}>            
+            <div className={s.products_wrapper}>
+              <div className={s.products_columns}>
+              { mock.map((item, index) => (
+                <div className={s.product}>
+                  <div className={s.topInfo}>
+                    <h3>{item.name}</h3>
+                  </div>
+                  <img src="http://placehold.it/350x150" alt="Product Image" />
+                  <div className={s.featureslist}>
+                    <div className={s.tag}>$600</div>
+                    <div className={s.rate}><span>5/5</span></div>
+                    <div>{item.description}</div>
+                  </div>
                 </div>
-                <img src="http://placehold.it/350x150" alt="Product Image" />
-                <div className={s.featureslist}>
-                  <div className={s.tag}>$600</div>
-                  <div className={s.rate}><span>5/5</span></div>
-                  <div>{item.description}</div>
-                </div>
+              )) }
               </div>
-            )) }
             </div>
           </div>
         </div>);
