@@ -38,13 +38,13 @@ class Comparator extends Component {
   }
 
   onSearchSubmit(res) {
-    console.log('fetching at /bd/v0/productSearch/' + res);
-    fetch('/bd/v0/productSearch/' + res)
+    console.log('fetching at /bd/v0/products/' + res);
+    fetch('/bd/v0/products/' + res)
       .then(function(response) {
         return response.json()
       }).then((json) => {
-        console.log(json.data);
-        this.state.items.push(json.data);
+        console.log(json);
+        this.state.items.push(json);
         this.setState({items: this.state.items});
       }).catch(function(ex) {
         console.error('parsing failed', ex)

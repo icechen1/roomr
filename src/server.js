@@ -47,6 +47,24 @@ var options = function() {
   };
 }
 
+app.get('/bd/v0/products/:sku', function (req, res) {
+  var payload = options();
+  payload.uri += '/' + req.params.sku;
+
+  function callback(error, response, body) {  
+    if (!error && response.statusCode == 200) {
+      var json = JSON.parse(body);
+      res.send((JSON.parse(body)).data);
+    }
+    else{
+      console.log(response.statusCode);
+      console.log(payload.uri);
+      console.log(response.request.body);
+    }
+  }
+  request(payload, callback);
+});
+
 app.get('/bd/v0/productSearch/:queryStr', function (req, res) {
   var payload = options();
   payload.uri += '/?query=' + req.params.queryStr;
