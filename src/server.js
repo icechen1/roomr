@@ -49,6 +49,8 @@ var options = function() {
 
 app.get('/bd/v0/productSearch/:queryStr', function (req, res) {
   var payload = options();
+  payload.uri += '/' + req.params.queryStr; 
+
   function callback(error, response, body) {  
     if (!error && response.statusCode == 200) {
       res.send(JSON.parse(body));

@@ -17,21 +17,24 @@ import 'whatwg-fetch';
 
 const mock = [
   {
-    sku: 0,
-    name: 'Cool ass TV',
+    productId: 0,
+    productItemName: 'Cool ass TV',
     description: 'This TV is petty damn dope.'
   },
   {
-    sku: 1,
-    name: 'Lame ass TV',
+    productId: 1,
+    productItemName: 'Lame ass TV',
     description: 'This TV is petty damn dope.'
   }
 ];
 
 class Comparator extends Component {
 
-  getInitialState() {
-   return {items: []}
+  constructor() {
+      super();
+      let initItems = [].concat(mock);
+      this.state = {items: initItems};
+      console.log(this.state.items);
   }
 
   onSearchSubmit(res) {
@@ -39,29 +42,30 @@ class Comparator extends Component {
     fetch('/bd/v0/productSearch/' + res)
       .then(function(response) {
         return response.json()
-      }).then(function(json) {
-        console.log('parsed json', json)
+      }).then((json) => {
+        console.log(json.data);
+        this.state.items.push(json.data);
+        this.setState({items: this.state.items});
       }).catch(function(ex) {
-        console.log('parsing failed', ex)
+        console.error('parsing failed', ex)
       });
   }
 
   componentWillUnmount() {
-    this.serverRequest.abort();
   }
 
   render() {
     return (
       <div>
-        <h1 className={s.title}>Comparing {mock.length} Products</h1>
-        <SearchBar callback={this.onSearchSubmit} />
+        <h1 className={s.title}>Comparing {this.state.items.length} Products</h1>
+        <SearchBar callback={this.onSearchSubmit.bind(this)} />
         <div className={s.products_table}>            
             <div className={s.products_wrapper}>
               <div className={s.products_columns}>
-              { mock.map((item, index) => (
-                <div className={s.product}>
+              { this.state.items.map((item, index) => (
+                <div key={item.skuNumber} className={s.product}>
                   <div className={s.topInfo}>
-                    <h3>{item.name}</h3>
+                    <h3>{item.productItemName}</h3>
                   </div>
                   <img src="http://placehold.it/350x150" alt="Product Image" />
                   <div className={s.featureslist}>

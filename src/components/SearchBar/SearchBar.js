@@ -15,9 +15,13 @@ import Link from '../Link';
 
 class SearchBar extends Component {
   handleChange(event) {
-    this.setState({search: event.target.value});
-    console.log(this.state);
-    this.props.callback(this.state.search);
+    this.setState({search: event.target.value})
+  }
+
+  handlePress(event) {
+    if (event.key === 'Enter') {
+      this.props.callback(this.state.search);
+    }
   }
 
   render() {
@@ -25,6 +29,7 @@ class SearchBar extends Component {
       <div>
         <input
           placeholder='Add new product to compare here...'
+          onKeyPress={this.handlePress.bind(this)}
           onChange={this.handleChange.bind(this)}
           type="text"
         />  
