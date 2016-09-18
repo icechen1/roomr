@@ -49,11 +49,12 @@ var options = function() {
 
 app.get('/bd/v0/productSearch/:queryStr', function (req, res) {
   var payload = options();
-  payload.uri += '/' + req.params.queryStr; 
+  payload.uri += '/?query=' + req.params.queryStr;
 
   function callback(error, response, body) {  
     if (!error && response.statusCode == 200) {
-      res.send(JSON.parse(body));
+      var json = JSON.parse(body);
+      res.send((JSON.parse(body)).data.products);
     }
     else{
       console.log(response.statusCode);
@@ -73,10 +74,9 @@ app.get('/bd/v0/productReviews/:sku', function (req, res) {
         var json = JSON.parse(body);
         var comments = [];
 
-        //json.forEach(function (item) {
-        for(var elem of json.Data){
+        for(var elem of json.Data) {
           comments.push(elem.comment);
-        };
+        }
         res.send(comments);
       }
       else{
