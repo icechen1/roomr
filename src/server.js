@@ -29,7 +29,59 @@ import routes from './routes';
 import assets from './assets'; // eslint-disable-line import/no-unresolved
 import { port, auth } from './config';
 
+import { API_KEY } from './secrets';
+
 const app = express();
+var util = require('util');
+var https = require('https');
+var request = require('request');
+
+var options = 
+{
+  uri: 'https://api.builddirect.io/products',
+  headers: {
+      'Ocp-Apim-Subscription-Key': API_KEY
+  },
+  //path: "/products/?query=table",
+  method: 'GET'
+};
+
+app.get('/bd/v0/productSearch/:queryStr', function (req, res) {
+  var payload = options;
+  function callback(error, response, body) {  
+    if (!error && response.statusCode == 200) {
+      res.send(JSON.parse(body));
+    }
+    else{
+      console.log(response.statusCode);
+      console.log(payload.uri);
+      console.log(response.request.body);
+    }
+  }
+  request(payload, callback);
+});
+
+app.get('/bd/v0/productReviews/:sku/:pgSize/:pgNum', function (req, res) {
+  var payload = options;
+  payload.uri += '/' + req.params.sku + '/reviews?pageSize=' + req.params.pgSize
+                                      + '&pageNumber=' + req.params.pgNum
+                                      + '&sortType=1';
+  function callback(error, response, body) {
+    if (error) {
+      console.log(error);
+    }  
+    if (!error && response.statusCode == 200) {
+      res.send(JSON.parse(body));
+    }
+    else{
+      console.log(response.statusCode);
+      console.log(payload.uri);
+      console.log(response.request.body);
+    }
+  }
+  request(payload, callback);
+});
+
 
 //
 // Tell any CSS tooling (such as Material UI) to use all vendor prefixes if the
