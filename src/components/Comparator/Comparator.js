@@ -152,19 +152,21 @@ class Comparator extends Component {
                             <div className={s.rate}><span>Unrated</span></div>
                         }
                         
-                        { this.renderSpecs(item.specifications).map((el, index) => 
-                          <div key={el.name}> <b>{ el.name }</b> : { el.value } </div>
-                        )}
+                        <h4> Review Analysis </h4>
+                        { this.parseReviews(item.reviews, true).map((item, index) => (
+                          <div key={item.word} className={s.tagGood}><b>{item.word}</b> {item.count}</div>
+                        )) }
+                        { this.parseReviews(item.reviews, false).map((item, index) => (
+                          <div key={item.word} className={s.tagBad}><b>{item.word}</b> {item.count}</div>
+                        )) }
                         
+                        <div className={s.specs}>
+                          { this.renderSpecs(item.specifications).map((el, index) => 
+                            <div key={el.name}> <b>{ el.name }</b> : { el.value } </div>
+                          )}
+                        </div>
                       </div>
                       <div dangerouslySetInnerHTML={ this.parseFeatures(item.features) }></div>
-                      <h4> Review Analysis </h4>
-                      { this.parseReviews(item.reviews, true).map((item, index) => (
-                        <div key={item.word} className={s.tagGood}><b>{item.word}</b> {item.count}</div>
-                      )) }
-                      { this.parseReviews(item.reviews, false).map((item, index) => (
-                        <div key={item.word} className={s.tagBad}><b>{item.word}</b> {item.count}</div>
-                      )) }
                     </div>
                   </div>
                   <a href={item.productUrl} className={s.buyBtnLink}>

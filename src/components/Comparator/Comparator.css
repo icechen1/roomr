@@ -4,6 +4,10 @@
   -webkit-overflow-scrolling: touch;
 }
 
+h4 {
+  margin: 0.5em;
+}
+
 .products_columns {
   display: flex;
   flex-wrap: nowrap;
@@ -43,7 +47,7 @@
   position: relative; 
   border-style: solid;
   border-width: 0px 1px 0px 0px;
-  border-color: #BBBBBB;
+  border-color: #DDDDDD;
 }
 
 .tagGood {
@@ -83,11 +87,6 @@
 
 .product:first-child{
   border-style: solid;
-  border-width: 0px 0px 0px 1px;
-}
-
-.product:only-child{
-  border-style: solid;
   border-width: 0px 1px 0px 1px;
 }
 
@@ -107,4 +106,15 @@
     display: inline-block;
     font-size: 26pt;
     font-weight: bold;
+}
+
+.specs {
+  margin: 10px 0px 10px 0px;
+  border-style: solid;
+  border-width: 1px 0px 0px 0px;
+  border-color: #DDDDDD;
+}
+
+.specs > div {
+  text-align: left;
 }
