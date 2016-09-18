@@ -146,9 +146,11 @@ class Comparator extends Component {
                       )) : <p> No reviews :( </p> }
                     </div>
                   </div>
-                  <div className={s.buyBtn}>
-                    <a href={item.productUrl}>Buy</a>
-                  </div>
+                  <a href={item.productUrl} className={s.buyBtnLink}>
+                    <div className={s.buyBtn}>
+                      Buy
+                    </div>
+                  </a>
                 </div>
               )) }
               </div>
