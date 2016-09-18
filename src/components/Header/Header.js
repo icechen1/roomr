@@ -15,16 +15,17 @@ import Navigation from '../Navigation';
 import logoUrl from './logo-small.png';
 
 function Header() {
+  // compareus!
   return (
     <div className={s.root}>
       <div className={s.container}>
         <Navigation className={s.nav} />
         <Link className={s.brand} to="/">
           <img src={logoUrl} width="38" height="38" alt="React" />
-          <span className={s.brandTxt}>CompareUs</span>
+          <span className={s.brandTxt}>bd2bd</span>
         </Link>
         <div className={s.banner}>
-          <h1 className={s.bannerTitle}>BuildDirect</h1>
+          <h2 className={s.bannerTitle}>BuildDirect Compare</h2>
           <p className={s.bannerDesc}>Buy buy buy!</p>
         </div>
       </div>
