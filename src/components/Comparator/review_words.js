@@ -11,5 +11,6 @@ export const REVIEW_WORDS = {
     'break': false,
     'bad': false,
     'good': true,
-    'pleased': true
+    'pleased': true,
+    'low':false
 }
