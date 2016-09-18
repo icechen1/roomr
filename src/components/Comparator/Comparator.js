@@ -67,9 +67,9 @@ class Comparator extends Component {
                   <div className={s.topInfo}>
                     <h3>{item.productItemName}</h3>
                   </div>
-                  <img src="http://placehold.it/350x150" alt="Product Image" />
+                  <img src={item.image} alt="Product Image" />
                   <div className={s.featureslist}>
-                    <div className={s.tag}>$600</div>
+                    <div className={s.tag}>${item.price}</div>
                     <div className={s.rate}><span>5/5</span></div>
                     <div>{item.description}</div>
                   </div>
